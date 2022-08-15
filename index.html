@@ -5,7 +5,336 @@
             hm.src = "//hm.baidu.com/hm.js?d465c96be4bb6a4fb75b9d26898a649d";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
-        })();</script><meta name="msvalidate.01" content="E132D739023AA5508A9D220B2F6AA7BB"><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-4152165722952624" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><meta name="generator" content="Hexo 6.1.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Rainbow</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-08-12T03:54:11.000Z" title="2022/8/12 上午11:54:11">2022-08-12</time>发表</span><span class="level-item"><time dateTime="2022-08-12T04:00:38.571Z" title="2022/8/12 下午12:00:38">2022-08-12</time>更新</span><span class="level-item">17 分钟读完 (大约2532个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/08/12/keycloak-%E6%95%B4%E5%90%88%E5%BE%AE%E4%BF%A1-union-id%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E7%BB%9F%E4%B8%80%E7%99%BB%E5%BD%95/">keycloak 整合微信 union id，实现微信统一登录</a></h1><div class="content"><h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h1><p>微信的第三方登录最开始是做的比较烂的。</p>
+        })();</script><meta name="msvalidate.01" content="E132D739023AA5508A9D220B2F6AA7BB"><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-4152165722952624" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><meta name="generator" content="Hexo 6.1.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Rainbow</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-08-15T07:29:20.000Z" title="2022/8/15 下午3:29:20">2022-08-15</time>发表</span><span class="level-item"><time dateTime="2022-08-15T07:30:31.953Z" title="2022/8/15 下午3:30:31">2022-08-15</time>更新</span><span class="level-item">26 分钟读完 (大约3886个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/08/15/java8%E6%96%B0%E7%89%B9%E6%80%A7%E5%8F%8A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/">java8新特性及多线程总结</a></h1><div class="content"><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>对于软件开发人员而言，在初次接触多线程编程以及java8中的stream时，估计可能会被其中的CPU、内核、线程等概念问题所困扰。</p>
+<p>但其实理清了思路后，这些概念很简单。</p>
+<p>要理解这些概念，还需要首先从CPU的发展历史说起。</p>
+<p>需要声明的是，本文并不会对新特性及多线程中如何使用进行过多的讲解，因为有足够多的文章以及书籍进行讲解。笔者所做的只是对其中涉及到的一些关键概念以及对新特性的理解进行说明。</p>
+<h3 id="2-CPU的发展"><a href="#2-CPU的发展" class="headerlink" title="2. CPU的发展"></a>2. CPU的发展</h3><h4 id="2-1-阶段"><a href="#2-1-阶段" class="headerlink" title="2.1 阶段"></a>2.1 阶段</h4><p>CPU的含义在发展的过程中经历了许多语义上的变化，因此在这里首先对本文说明的CPU下一个定义。CPU（中央处理单元）实际上就是一个计算模块，作用就是执行汇编指令，进行计算。它的发展分为以下几个阶段：</p>
+<ul>
+<li><p><strong>第一阶段</strong>：在计算机最开始时，一台计算机只有一个CPU，因此，就存在不能同时执行多个任务（也就是无法并行，只能并发）的问题。一个CPU中都具有数据总线、地址总线以及与内存适配速度的cache。</p>
+</li>
+<li><p><strong>第二阶段</strong>：为了能进行并行处理，那么很自然地能够想到可以通过添加多个计算模块进行解决。这就存在两个添加的方案：第一个方案是添加多个计算模块，这多个计算模块属于同级关系；另一个方案是一个计算模块中再添加多个计算模块。这两种方式有什么区别呢？区别就在于第一个方案分别使用不同的总线、不同的cache，因此存在数据不一致问题；第二个方案共用总线，共用cache，由内部协调。而第二个方案中添加的多个计算模块就是<strong>核心(core)<strong>。这其实是为了区别于CPU的称谓，两者可以视为等同。因为，此时的</strong>core</strong>与第一阶段中的CPU作用仍然相同，还是处理汇编指令。两种方案最后的名字分别叫做：多CPU单核心和单CPU多核心。</p>
+</li>
+<li><p><strong>第三阶段</strong>：为了能使单CPU多核心中的每个核心再进一步地提升性能，英特尔和AMD都实现了超线程的技术。这种技术提升性能的机制在于通过将一个物理上的core模拟成逻辑上的多个<strong>线程(processor)<strong>，每个processor同样能够实现计算模块的功能，也就是所谓几核几线程。细心的读者可能注意到，这里对processor的翻译与thread的翻译相同了，都是线程。这其实是翻译的一个误区，很多地方其实都是这样翻译的，而也正是因为这样的翻译错误，导致作为软件开发人员在接触一些编程概念时，容易产生混淆。</strong>后文中都会将processor翻译为处理器， 将thread翻译为线程。</strong></p>
+</li>
+</ul>
+<p>参考下图：</p>
+<p><img src="http://image.rainbowecho.top/multiple-core.jpg" alt="multiple-core"></p>
+<p>至此，我们再进行一下CPU，内核，处理器(processor)，这三个概念。</p>
+<p><strong>CPU</strong>代表的是一个或多个核心的集合，每个CPU具有独立的总线，cache。</p>
+<p><strong>核心</strong>指的是单纯进行计算的模块，能够独立完成汇编指令，包含在CPU中。</p>
+<p><strong>处理器</strong>是通过超线程技术对一个核心模拟出的计算模块。</p>
+<p><strong>内核（kernel）</strong>则是软件层对硬件层的第一层抽象，如Linux内核，向用户提供一些调度计算机的接口。</p>
+<p><strong>进程</strong>（Process）是计算机中的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位。在如今的程序设计中，作用仅是使用PCB块进行资源(CPU、内存)的分配和调度。</p>
+<p><strong>线程</strong>（thread）是操作系统能够进行运算调度的最小单位。用于利用进程分配的资源进行程序的执行。</p>
+<h4 id="2-2-查看本机CPU信息"><a href="#2-2-查看本机CPU信息" class="headerlink" title="2.2 查看本机CPU信息"></a>2.2 查看本机CPU信息</h4><p>推荐使用命令行的方式，Windows下：</p>
+<p><img src="http://image.rainbowecho.top/%E8%8E%B7%E5%8F%96CPU%E4%BF%A1%E6%81%AF.png" alt="获取CPU信息"></p>
+<p>在进行多线程编程时，如果设置了多个线程，那么这些线程将会由操作系统进行分配到不同的处理器中进行执行。比如4核8处理器的计算机，运行了一段设置了8个线程的程序，操作系统此时的分配可能会是每个处理器分配一个线程。分配的原则很明显，是尽量快的响应与处理。</p>
+<h4 id="2-3-计算机不同架构分析"><a href="#2-3-计算机不同架构分析" class="headerlink" title="2.3 计算机不同架构分析"></a>2.3 计算机不同架构分析</h4><p>前面提及了一下如今计算机的架构的两种方案：单CPU多核心和多CPU单核心。</p>
+<ul>
+<li><strong>单CPU多核心</strong><ul>
+<li>优点：成本容易得到控制，也会有比较好的性能，架构也比较简单清晰</li>
+<li>缺点：如果在这样的计算机上运行多线程程序，那么由于多个核心之前会共用一套总线和cache，随着线程之间的通信，总线的压力就会比较大，且数据在cache会存在，更何况现在一般都是三级cache，数据一致性就很难保证</li>
+</ul>
+</li>
+<li><strong>多CPU单核心</strong><ul>
+<li>优点：可以适用于大规模的计算</li>
+<li>缺点：I&#x2F;O瓶颈大</li>
+</ul>
+</li>
+</ul>
+<p>所以，根据两种方案的不同，单CPU多核心通常用于普通消费市场，作为个人电脑使用。多CPU单核心常见于分布式系统、云计算平台、超级计算机等。</p>
+<p>对于程序开发人员而言，以上的基础概念理清之后，对于Java8中新特性以及多线程中的理解就会更容易一些了。</p>
+<h3 id="3-Java8新特性"><a href="#3-Java8新特性" class="headerlink" title="3. Java8新特性"></a>3. Java8新特性</h3><h4 id="3-1-Java8中重要的编程概念"><a href="#3-1-Java8中重要的编程概念" class="headerlink" title="3.1 Java8中重要的编程概念"></a>3.1 Java8中重要的编程概念</h4><p>在了解Java8新特性及使用之前，首先需要了解在Java8中涉及到的三个重要的编程概念。这三个编程概念掌握的好坏会直接新特性使用。</p>
+<p>这三个编程概念如下：</p>
+<ul>
+<li>行为参数化<ul>
+<li>方法引用</li>
+<li>lambda表达式</li>
+</ul>
+</li>
+<li>流计算</li>
+<li>不在并行中使用共享的可变数据</li>
+</ul>
+<p>行为参数化的意思是，将代码作为参数传递给某个方法执行。这在Java8之前的Java语言中，是无法实现的。</p>
+<p>流计算的思想在于，抛弃了原本使用集合形式进行数据的计算。因为使用Java中的集合，你首先需要是集合中填充满所有你需要的元素，而这些元素都是直接存储到内存中的。这似乎没有什么问题，但假如数据量足够大的时候，你又如何处理呢？</p>
+<p>读者可能会问，为何要一定要使用行为参数化和流计算，我之前使用Java的时候没有行为参数化也能使用的很好啊，也能完成我想要实现的目的。</p>
+<p>的确，使用行为参数化并不会让你的代码具有新的功能。但是它能带来的是更好的灵活性和可读性，让你对功能的实现变得简便、高效。这难道不具有吸引力吗？</p>
+<p>话说至此，尽快开始。</p>
+<h4 id="3-2-行为参数化"><a href="#3-2-行为参数化" class="headerlink" title="3.2 行为参数化"></a>3.2 行为参数化</h4><p>行为参数化的实现，也就是传递代码作为参数，有两种方式：</p>
+<ul>
+<li>lambda表达式</li>
+<li>方法引用。方法引用包括，普通方法的引用以及构造函数的引用</li>
+</ul>
+<h5 id="3-2-1-行为参数化的条件"><a href="#3-2-1-行为参数化的条件" class="headerlink" title="3.2.1 行为参数化的条件"></a>3.2.1 行为参数化的条件</h5><p>两种方式要实现<strong>都需要满足一定的条件。</strong></p>
+<p>要使用<strong>lambda表达式</strong>，一定<strong>需要一个函数式接口</strong>。</p>
+<p>要使用<strong>方法引用</strong>，则<strong>要求lambda表达式只有一行</strong>。因为方法引用本质上是对lambda表达式的简化，所以方法引用还需要满足能使用lambda表达式的条件。</p>
+<h5 id="3-2-2-如何lambda化"><a href="#3-2-2-如何lambda化" class="headerlink" title="3.2.2 如何lambda化"></a>3.2.2 如何lambda化</h5><p>如果要对某个方法中的某段代码进行lambda化，那么下列过程将会指导你如何完成lambda化的抽取：</p>
+<ul>
+<li>明确方法中可变的代码部分与不变代码部分，可变的代码部分<strong>应尽量集中</strong></li>
+<li>明确变化代码部分的返回值的类型与参数，返回值类型和参数的确认可以通过抽离后观察得出</li>
+<li>定义一个相同返回值的函数接口</li>
+<li>将该接口作为该方法的参数，并在代码抽取的部分调用该接口</li>
+<li>将可变代码传递进该方法</li>
+</ul>
+<p>Java8中提供了许多函数接口使用，有以下几类，如：</p>
+<table>
+<thead>
+<tr>
+<th>函数式接口</th>
+<th>函数描述符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Predicate&lt;T&gt;</td>
+<td>T -&gt; boolean</td>
+<td>断言</td>
+</tr>
+<tr>
+<td>Consumer&lt;T&gt;</td>
+<td>T -&gt; void</td>
+<td>消费者</td>
+</tr>
+<tr>
+<td>Function&lt;T, R&gt;</td>
+<td>T -&gt; R</td>
+<td>转换</td>
+</tr>
+<tr>
+<td>Supplier&lt;T&gt;</td>
+<td>void -&gt; T</td>
+<td>生产者</td>
+</tr>
+<tr>
+<td>UnaryOperator&lt;T&gt;</td>
+<td>T -&gt; T</td>
+<td>单元操作</td>
+</tr>
+<tr>
+<td>BinarayOperator&lt;T&gt;</td>
+<td>(T, T) -&gt; T</td>
+<td>双元操作</td>
+</tr>
+<tr>
+<td>BiPredicate&lt;L, R&gt;</td>
+<td>(L, R) -&gt; boolean</td>
+<td>双元断言</td>
+</tr>
+<tr>
+<td>BiConsumer&lt;T, U&gt;</td>
+<td>(T, U) -&gt; void</td>
+<td>双元消费者</td>
+</tr>
+<tr>
+<td>BiFunction&lt;T, U, R&gt;</td>
+<td>(T, U) -&gt; R</td>
+<td>双元转换</td>
+</tr>
+</tbody></table>
+<p>需要说明的是，每类函数接口都有针对于基本类型的实现，目的是为了避免自动装箱、拆箱。同时，也建议如果要对基本类型进行操作，<strong>最好选择对应基本类型函数接口</strong>，这样效率更高。<strong>但是对于Optional&lt;T&gt;，最好不要用基本类型的Optional。</strong></p>
+<h5 id="3-2-3-类型检查、类型推断以及限制"><a href="#3-2-3-类型检查、类型推断以及限制" class="headerlink" title="3.2.3 类型检查、类型推断以及限制"></a>3.2.3 类型检查、类型推断以及限制</h5><p>lambda表达式的<strong>类型检查过程十分重要</strong>，包含三个上下文：<strong>赋值上下文（找到对应的函数接口）</strong>，<strong>方法调用上下文（找到函数接口中执行的方法）</strong>，<strong>类型转换上下文（明确方法签名是否吻合）</strong>，如下：</p>
+<p><img src="http://image.rainbowecho.top/true-lambda-type-check.jpg" alt="true-lambda-type-check"></p>
+<p>lambda表达式的<strong>限制在于使用的局部变量必须是final</strong>的。因为lambda表达式会透明地使用多线程。</p>
+<h5 id="3-2-4-lambda表达式的应用场景"><a href="#3-2-4-lambda表达式的应用场景" class="headerlink" title="3.2.4 lambda表达式的应用场景"></a>3.2.4 lambda表达式的应用场景</h5><p>在以下两种情况下，最适合使用lambda表达式：</p>
+<ul>
+<li>延迟执行：当某段代码作为方法的参数，需要被延迟执行时</li>
+<li>环绕执行：当某段代码被一系列模板代码包围时，可以将这部分代码抽取为lambda表达式，如文件操作</li>
+</ul>
+<h4 id="3-3-方法引用"><a href="#3-3-方法引用" class="headerlink" title="3.3 方法引用"></a>3.3 方法引用</h4><p>方法引用的目的在于简化lambda表达式，通过让方法名称代替lambda表达式，从而具有更好的可读性。</p>
+<p>需要再次强调的是，<strong>方法引用只适用于一行lambda表达式的情况</strong>，如：</p>
+<table>
+<thead>
+<tr>
+<th>lambda表达式</th>
+<th>等效的方法引用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(Apple a) -&gt; a.getWeight()</td>
+<td>Apple::getWeight</td>
+</tr>
+<tr>
+<td>(String s) -&gt; System.out.println(s)</td>
+<td>System.out::println</td>
+</tr>
+<tr>
+<td>() -&gt; new Apple()</td>
+<td>Apple::new</td>
+</tr>
+</tbody></table>
+<h4 id="3-4-流计算"><a href="#3-4-流计算" class="headerlink" title="3.4 流计算"></a>3.4 流计算</h4><p>流与集合区别在于，集合讲的是数据，流讲的是计算。流是<strong>惰性计算</strong>的，是<strong>按需生成</strong>的，是<strong>一次性</strong>的，对用户而言<strong>具有透明地并行、内部迭代</strong>的优点。</p>
+<p>流的使用包括三件事：</p>
+<ul>
+<li>根据一个数据源生成流</li>
+<li>一个中间操作链，形成一条流的流水线</li>
+<li>一个终端操作，执行流水线，并生成结果</li>
+</ul>
+<p>操作分析如下：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>类型</th>
+<th>返回类型</th>
+<th>使用的类型&#x2F;函数式接口</th>
+<th>函数描述符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>filter</td>
+<td>中间</td>
+<td>Stream&lt;T&gt;</td>
+<td>Predicate&lt;T&gt;</td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>中间(有状态-无界)</td>
+<td>Stream&lt;T&gt;</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>skip</td>
+<td>中间(有状态-有界)</td>
+<td>Stream&lt;T&gt;</td>
+<td>long</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>中间(有状态-有界)</td>
+<td>Stream&lt;T&gt;</td>
+<td>long</td>
+<td></td>
+</tr>
+<tr>
+<td>map</td>
+<td>中间</td>
+<td>Stream&lt;R&gt;</td>
+<td>Function&lt;T, R&gt;</td>
+<td>T -&gt; R</td>
+</tr>
+<tr>
+<td>flatMap</td>
+<td>中间</td>
+<td>Stream&lt;R&gt;</td>
+<td>Function&lt;T, Stream&lt;R&gt;&gt;</td>
+<td>T -&gt; Stream&lt;R&gt;</td>
+</tr>
+<tr>
+<td>sorted</td>
+<td>中间(有状态-无界)</td>
+<td>Stream&lt;T&gt;</td>
+<td>Comparator&lt;T&gt;</td>
+<td>(T, T) -&gt; int</td>
+</tr>
+<tr>
+<td>anyMatch</td>
+<td>终端</td>
+<td>boolean</td>
+<td>Predicate&lt;T&gt;</td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>allMatch</td>
+<td>终端</td>
+<td>boolean</td>
+<td>Predicate&lt;T&gt;</td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>noneMatch</td>
+<td>终端</td>
+<td>boolean</td>
+<td>Predicate&lt;T&gt;</td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>findAny</td>
+<td>终端</td>
+<td>Optional&lt;T&gt;</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>findFirst</td>
+<td>终端</td>
+<td>Optional&lt;T&gt;</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>forEach</td>
+<td>终端</td>
+<td>void</td>
+<td>Consumer&lt;T&gt;</td>
+<td>T -&gt; void</td>
+</tr>
+<tr>
+<td>collect</td>
+<td>终端</td>
+<td>R</td>
+<td>Collector&lt;T, A, R&gt;</td>
+<td></td>
+</tr>
+<tr>
+<td>reduce</td>
+<td>终端(有状态-有界)</td>
+<td>Optional&lt;T&gt;</td>
+<td>BinaryOperator&lt;T&gt;</td>
+<td>(T, T) -&gt; T</td>
+</tr>
+<tr>
+<td>count</td>
+<td>终端</td>
+<td>long</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>无状态：输出流得到0个或1个结果</p>
+<p>有状态：输出流有多个结果</p>
+<p>有状态-有界：输出流有多个结果，但结果有限</p>
+<p>有状态-无界：输出流有多个结果，且结果无限</p>
+<h5 id="3-4-1-具体例子"><a href="#3-4-1-具体例子" class="headerlink" title="3.4.1 具体例子"></a>3.4.1 具体例子</h5><p><strong><code>flatMap</code>方法：</strong></p>
+<p>将元素为List的元素进行合并</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类型为List的元素stream合并</span></span><br><span class="line"><span class="type">Person</span> <span class="variable">zhangsan</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">22</span>);</span><br><span class="line"><span class="type">Person</span> <span class="variable">lisi</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;lisi&quot;</span>, <span class="number">22</span>);</span><br><span class="line"><span class="type">Person</span> <span class="variable">wangwu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;wangwu&quot;</span>, <span class="number">22</span>);</span><br><span class="line">ArrayList&lt;Person&gt; people1 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">people1.add(zhangsan);</span><br><span class="line">people1.add(lisi);</span><br><span class="line"></span><br><span class="line">ArrayList&lt;Person&gt; people2 = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">people2.add(wangwu);</span><br><span class="line"></span><br><span class="line">ArrayList&lt;List&lt;Person&gt;&gt; lists = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">lists.add(people1);</span><br><span class="line">lists.add(people2);</span><br><span class="line"></span><br><span class="line">List&lt;Person&gt; collect = lists.stream().flatMap(Collection::stream).collect(Collectors.toList());</span><br><span class="line">System.out.println(<span class="string">&quot;collect = &quot;</span> + collect); <span class="comment">// collect = [Person&#123;name=&#x27;zhangsan&#x27;, age=22&#125;, Person&#123;name=&#x27;lisi&#x27;, age=22&#125;, Person&#123;name=&#x27;wangwu&#x27;, age=22&#125;]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-5-Optional类"><a href="#3-5-Optional类" class="headerlink" title="3.5 Optional类"></a>3.5 Optional类</h4><p>Optional类在语义可以明确的告知开发人员，这个字段可能会缺失值，提高可读性。</p>
+<p>在维护性上，Optional类可以<strong>消除因为null</strong>而引起的<code>if</code>连锁语句，还可以<strong>取代异常抛出</strong>无法返回值的情况。</p>
+<h5 id="3-5-1-重要的方法"><a href="#3-5-1-重要的方法" class="headerlink" title="3.5.1 重要的方法"></a>3.5.1 重要的方法</h5><p>Optional类中有两个非常重要的方法：<strong>map</strong>和<strong>flatMap</strong></p>
+<ul>
+<li>map：从Optional类中获取原始类型值</li>
+<li>flatMap：从Optional类中获取Optional类</li>
+</ul>
+<h5 id="3-5-2-注意"><a href="#3-5-2-注意" class="headerlink" title="3.5.2 注意"></a>3.5.2 注意</h5><p>使用Optional，需要特别注意两点：</p>
+<ul>
+<li>Optional类型的字段无法序列化。但是可以通过手动提供一个返回Optional类的getter方法实现相同效果</li>
+<li>不建议使用基础类型的Optional包装类。因为，无法使用map等方法。</li>
+</ul>
+<h4 id="3-6-构建异步API"><a href="#3-6-构建异步API" class="headerlink" title="3.6 构建异步API"></a>3.6 构建异步API</h4><p>Java8中可以通过两种方式构建异步的API，两种都是基于callable和future接口：</p>
+<ul>
+<li>并行流</li>
+<li>使用CompletableFuture发起异步请求</li>
+</ul>
+<p>两种方案各有优缺点，适用场景为：</p>
+<ul>
+<li>计算密集型，没有I&#x2F;O，<strong>使用并行流</strong></li>
+<li>涉及I&#x2F;O（网络I&#x2F;O，文件I&#x2F;O），使用<strong>CompletableFuture</strong>，灵活性更好</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; urls = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">	urls.add(<span class="string">&quot;http://www.baidu.com&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">threads</span> <span class="operator">=</span> (<span class="type">int</span>) (Runtime.getRuntime().availableProcessors() * <span class="number">0.8</span> * <span class="number">100</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;threads = &quot;</span> + threads);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义线程数，充分利用资源</span></span><br><span class="line"><span class="type">Executor</span> <span class="variable">executorService</span> <span class="operator">=</span> Executors.newFixedThreadPool(Math.min(urls.size(), threads), <span class="keyword">new</span> <span class="title class_">ThreadFactory</span>() &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">AtomicInteger</span> <span class="variable">threadNum</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> Thread <span class="title function_">newThread</span><span class="params">(Runnable r)</span> &#123;</span><br><span class="line">		<span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(r);</span><br><span class="line">		thread.setDaemon(<span class="literal">true</span>);</span><br><span class="line">		thread.setPriority(<span class="number">5</span>);</span><br><span class="line">		thread.setName(<span class="string">&quot;Thread Monitor &quot;</span> + threadNum.incrementAndGet());</span><br><span class="line">		<span class="keyword">return</span> thread;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分为两个流操作进行调用，避免阻塞</span></span><br><span class="line">List&lt;CompletableFuture&lt;String&gt;&gt; collect = urls.stream().map(url -&gt; CompletableFuture.supplyAsync(() -&gt; &#123;</span><br><span class="line">	<span class="type">HttpResult</span> <span class="variable">httpResult</span> <span class="operator">=</span> HTTP.builder().baseUrl(url).build().sync(<span class="string">&quot;&quot;</span>).get();</span><br><span class="line">	<span class="type">int</span> <span class="variable">random</span> <span class="operator">=</span> RandomUtil.randomInt(<span class="number">1</span>, <span class="number">10</span>);</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">millis</span> <span class="operator">=</span> random * <span class="number">1000</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> Thread.currentThread().getName();</span><br><span class="line">		System.out.println(<span class="string">&quot;Thread &quot;</span> + name + <span class="string">&quot; millis = &quot;</span> + millis);</span><br><span class="line">		Thread.sleep(millis);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> httpResult.getBody().toString();</span><br><span class="line">&#125;, executorService)).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这样操作，耗时将会是最长的一个调用的时间</span></span><br><span class="line"><span class="type">Stopwatch</span> <span class="variable">s2</span> <span class="operator">=</span> Stopwatch.createStarted();</span><br><span class="line">List&lt;String&gt; results = collect.stream().map(CompletableFuture::join).collect(Collectors.toList());</span><br><span class="line"><span class="type">long</span> <span class="variable">d2</span> <span class="operator">=</span> s2.elapsed(TimeUnit.SECONDS);</span><br><span class="line">log.info(<span class="string">&quot;d2: &#123;&#125;&quot;</span>, d2);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>《Java8实战》</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010250863/article/details/79965465">https://blog.csdn.net/u010250863/article/details/79965465</a></li>
+</ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-08-12T03:54:11.000Z" title="2022/8/12 上午11:54:11">2022-08-12</time>发表</span><span class="level-item"><time dateTime="2022-08-12T04:00:38.571Z" title="2022/8/12 下午12:00:38">2022-08-12</time>更新</span><span class="level-item">17 分钟读完 (大约2532个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/08/12/keycloak-%E6%95%B4%E5%90%88%E5%BE%AE%E4%BF%A1-union-id%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E7%BB%9F%E4%B8%80%E7%99%BB%E5%BD%95/">keycloak 整合微信 union id，实现微信统一登录</a></h1><div class="content"><h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h1><p>微信的第三方登录最开始是做的比较烂的。</p>
 <blockquote>
 <p>首先，微信有多种登录方式：</p>
 <table>
@@ -352,26 +681,7 @@
 <p>但需要注意的是，<strong>证书文件名称必须为 tls.key、tls.crt</strong></p>
 <p>如果使用<strong>阿里云 nginx 证书</strong>的话，那么证书文件映射应该配置为：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;2.1&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"> <span class="attr">keycloak:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">jboss/keycloak:15.0.0</span></span><br><span class="line">  <span class="attr">container_name:</span> <span class="string">keycloak</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="number">443</span><span class="string">:8443</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">./certs/xxx.pem:/etc/x509/https/tls.crt</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">./certs/xxx.key:/etc/x509/https/tls.key</span></span><br><span class="line">  <span class="attr">environment:</span></span><br><span class="line">   <span class="attr">DB_VENDOR:</span> <span class="string">mysql</span></span><br><span class="line">   <span class="attr">DB_DATABASE:</span> <span class="string">keycloak</span></span><br><span class="line">   <span class="attr">DB_USER:</span> <span class="string">keycloak</span></span><br><span class="line">   <span class="attr">DB_PASSWORD:</span> <span class="string">keycloak</span></span><br><span class="line">   <span class="attr">KEYCLOAK_USER:</span> <span class="string">admin</span></span><br><span class="line">   <span class="attr">KEYCLOAK_PASSWORD:</span> <span class="string">admin</span></span><br><span class="line">   <span class="attr">JDBC_PARAMS:</span> <span class="string">&quot;useSSL=false&quot;</span></span><br><span class="line">  <span class="attr">depends_on:</span></span><br><span class="line">   <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">condition:</span> <span class="string">service_healthy</span></span><br><span class="line">  <span class="attr">networks:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">keycloak-network</span></span><br><span class="line"></span><br><span class="line"> <span class="attr">mysql:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">mysql:5.7</span></span><br><span class="line">  <span class="attr">container_name:</span> <span class="string">mysql</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="number">3306</span><span class="string">:3306</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">healthcheck:</span></span><br><span class="line">   <span class="attr">test:</span> [<span class="string">&quot;CMD&quot;</span>, <span class="string">&quot;mysqladmin&quot;</span> ,<span class="string">&quot;ping&quot;</span>, <span class="string">&quot;-h&quot;</span>, <span class="string">&quot;localhost&quot;</span>]</span><br><span class="line">   <span class="attr">interval:</span> <span class="string">5s</span></span><br><span class="line">   <span class="attr">timeout:</span> <span class="string">3s</span></span><br><span class="line">   <span class="attr">retries:</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">environment:</span></span><br><span class="line">   <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">root</span></span><br><span class="line">   <span class="attr">MYSQL_DATABASE:</span> <span class="string">keycloak</span></span><br><span class="line">   <span class="attr">MYSQL_USER:</span> <span class="string">keycloak</span></span><br><span class="line">   <span class="attr">MYSQL_PASSWORD:</span> <span class="string">keycloak</span></span><br><span class="line">  <span class="attr">networks:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">keycloak-network</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"> <span class="attr">keycloak-network:</span></span><br></pre></td></tr></table></figure>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-07-14T08:42:28.000Z" title="2022/7/14 下午4:42:28">2022-07-14</time>发表</span><span class="level-item"><time dateTime="2022-07-14T08:42:28.348Z" title="2022/7/14 下午4:42:28">2022-07-14</time>更新</span><span class="level-item">几秒读完 (大约0个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/07/14/keycloak-%E4%BD%BF%E7%94%A8%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93/">keycloak 使用外部数据库</a></h1><div class="content"></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-07-14T08:41:30.000Z" title="2022/7/14 下午4:41:30">2022-07-14</time>发表</span><span class="level-item"><time dateTime="2022-08-01T03:00:13.442Z" title="2022/8/1 上午11:00:13">2022-08-01</time>更新</span><span class="level-item">2 分钟读完 (大约349个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/07/14/keycloak-%E8%87%AA%E5%AE%9A%E4%B9%89-token-%E5%93%8D%E5%BA%94/">keycloak 自定义 token 响应</a></h1><div class="content"><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>大多数时候，我们需要将用户额外的一些封装到 token 中进行返回。</p>
-<p><img src="https://piacgowvlw.feishu.cn/space/api/box/stream/download/asynccode/?code=YjUyYjA3ZmYxNDA2NzY3NmNiNWM0YmFmNGM5YTMzZmRfVGdRTlNIY21XSXI4MG9xcTlxb3JhUngwaEt2RDhGMWZfVG9rZW46Ym94Y25uaWR6UUI2RHphMWFiV2NhWmlXV25jXzE2NTkzMjI3Njc6MTY1OTMyNjM2N19WNA" alt="img"></p>
-<p>比如这个用户，在它的 attribute 中具有一个 avatar 字段。如果我们只是使用 keycloak 标准的 token 的封装方式，里面根本不会有这个字段。</p>
-<p>那么，怎么让 token 信息中包含这个字段呢？</p>
-<h1 id="2-具体实现"><a href="#2-具体实现" class="headerlink" title="2 具体实现"></a>2 具体实现</h1><p>其实，使用 client 的 mapper 就能解决</p>
-<p>具体操作流程如下：</p>
-<ol>
-<li>找到对应 client，使用哪个 client 进行认证的，就选哪个。点击进入</li>
-</ol>
-<p><img src="https://piacgowvlw.feishu.cn/space/api/box/stream/download/asynccode/?code=ZmQyMmEwYWVmNGNhZTY4N2M5OWUyNGQ1MTBlZjI2OTVfQ25FVHBEdG16cUIzbTY5U0xkQkJ0cE05VWVWRGRXMUhfVG9rZW46Ym94Y25WNXd5ZnhWa2gyR3dRNVJKd2dManBkXzE2NTkzMjI3Njc6MTY1OTMyNjM2N19WNA" alt="img"></p>
-<ol>
-<li>找到 mapper，创建一个新的 mapper</li>
-</ol>
-<p><img src="https://piacgowvlw.feishu.cn/space/api/box/stream/download/asynccode/?code=MDM4MGQ4YTQ1OWNhYjE3MDRkYThmNDJiYTExZWYwMzJfMzRrZzBXWkx0YVRnV2xvU1d2RmJEMldMTGdlRHh1aklfVG9rZW46Ym94Y242Z2hjakF4bXVZZWNVelNCMFhIZ01QXzE2NTkzMjI3Njc6MTY1OTMyNjM2N19WNA" alt="img"></p>
-<ol>
-<li>此处我想将用户 attribute 中的 avatar 配置成 token 中的 avatar 字段，于是需要这样配置：</li>
-</ol>
-<p><img src="https://piacgowvlw.feishu.cn/space/api/box/stream/download/asynccode/?code=ZmY2YzQwMzlkMDIyOGZkNmM2YTEwOGE2ZTgwY2M2ZDZfd1RjSnY0RU9QYUpyQXlYSUFjZTVBVUdGbGdUSjc3bGJfVG9rZW46Ym94Y25icGpwVTF1bmZpMHh6NlVETk5YWW9UXzE2NTkzMjI3Njc6MTY1OTMyNjM2N19WNA" alt="img"></p>
-<p>Token claim name 就是 token 中字段的名称</p>
-</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/page/0/">上一页</a></div><div class="pagination-next"><a href="/page/2/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/38370475?v=4" alt="Rainbow"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Rainbow</p><p class="is-size-6 is-block">一个一直在学习的程序猿</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国/广东/深圳</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">25</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">24</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/rainbowechoes" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/rainbowechoes"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">后端开发</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BF%90%E7%BB%B4/"><span class="level-start"><span class="level-item">运维</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/cors/"><span class="tag">cors</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elasticsearch/"><span class="tag">elasticsearch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/jackson/"><span class="tag">jackson</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/java/"><span class="tag">java</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/k8s/"><span class="tag">k8s</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/keycloak/"><span class="tag">keycloak</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nginx/"><span class="tag">nginx</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/rabbitmq/"><span class="tag">rabbitmq</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring/"><span class="tag">spring</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring-cloud/"><span class="tag">spring cloud</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring-cloud-gateway/"><span class="tag">spring cloud gateway</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring-data/"><span class="tag">spring data</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring-security/"><span class="tag">spring security</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/token/"><span class="tag">token</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/webflux/"><span class="tag">webflux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/websocket/"><span class="tag">websocket</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BC%98%E5%8C%96/"><span class="tag">优化</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"><span class="tag">分布式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"><span class="tag">前后端分离</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1/"><span class="tag">动态路由</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1/"><span class="tag">微信</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">微信小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E7%BB%9F%E4%B8%80%E7%99%BB%E5%BD%95/"><span class="tag">微信统一登录</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/"><span class="tag">注册中心</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-12T03:54:11.000Z">2022-08-12</time></p><p class="title"><a href="/2022/08/12/keycloak-%E6%95%B4%E5%90%88%E5%BE%AE%E4%BF%A1-union-id%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E7%BB%9F%E4%B8%80%E7%99%BB%E5%BD%95/">keycloak 整合微信 union id，实现微信统一登录</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-10T02:34:56.000Z">2022-08-10</time></p><p class="title"><a href="/2022/08/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-keycloak-SAT-%E8%B0%83%E7%94%A8-rest-api/">如何使用 keycloak SAT 调用 rest api</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-04T09:47:59.000Z">2022-08-04</time></p><p class="title"><a href="/2022/08/04/%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E6%9C%8D%E5%8A%A1%E8%B7%AF%E7%94%B1%E7%9A%84%E5%AE%9E%E7%8E%B0/">自动注册服务路由的实现</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-01T02:40:51.000Z">2022-08-01</time></p><p class="title"><a href="/2022/08/01/Spring-Cloud-Gateway-CORS-%E9%85%8D%E7%BD%AE/">Spring Cloud Gateway CORS 配置</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-19T06:12:18.000Z">2022-07-19</time></p><p class="title"><a href="/2022/07/19/mysql-%E4%BA%8B%E5%8A%A1%E5%93%8D%E5%BA%94%E8%BF%87%E6%85%A2/">mysql 事务响应过慢</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/06/"><span class="level-start"><span class="level-item">六月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4152165722952624" data-ad-slot="8341006320" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Rainbow</a><p class="is-size-7"><span>&copy; 2022 rainbow</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-07-14T08:42:28.000Z" title="2022/7/14 下午4:42:28">2022-07-14</time>发表</span><span class="level-item"><time dateTime="2022-07-14T08:42:28.348Z" title="2022/7/14 下午4:42:28">2022-07-14</time>更新</span><span class="level-item">几秒读完 (大约0个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/07/14/keycloak-%E4%BD%BF%E7%94%A8%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE%E5%BA%93/">keycloak 使用外部数据库</a></h1><div class="content"></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/page/0/">上一页</a></div><div class="pagination-next"><a href="/page/2/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/38370475?v=4" alt="Rainbow"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Rainbow</p><p class="is-size-6 is-block">一个一直在学习的程序猿</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国/广东/深圳</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">26</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/rainbowechoes" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/rainbowechoes"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">后端开发</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%BF%90%E7%BB%B4/"><span class="level-start"><span class="level-item">运维</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/cors/"><span class="tag">cors</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/elasticsearch/"><span class="tag">elasticsearch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/jackson/"><span class="tag">jackson</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/java/"><span class="tag">java</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/k8s/"><span class="tag">k8s</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/keycloak/"><span class="tag">keycloak</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nginx/"><span class="tag">nginx</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/rabbitmq/"><span class="tag">rabbitmq</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring/"><span class="tag">spring</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring-cloud/"><span class="tag">spring cloud</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring-cloud-gateway/"><span class="tag">spring cloud gateway</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring-data/"><span class="tag">spring data</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring-security/"><span class="tag">spring security</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/stream-%E6%93%8D%E4%BD%9C/"><span class="tag">stream 操作</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/token/"><span class="tag">token</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/webflux/"><span class="tag">webflux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/websocket/"><span class="tag">websocket</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BC%98%E5%8C%96/"><span class="tag">优化</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"><span class="tag">函数式编程</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"><span class="tag">分布式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"><span class="tag">前后端分离</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1/"><span class="tag">动态路由</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1/"><span class="tag">微信</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">微信小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%AE%E4%BF%A1%E7%BB%9F%E4%B8%80%E7%99%BB%E5%BD%95/"><span class="tag">微信统一登录</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/"><span class="tag">注册中心</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-15T07:29:20.000Z">2022-08-15</time></p><p class="title"><a href="/2022/08/15/java8%E6%96%B0%E7%89%B9%E6%80%A7%E5%8F%8A%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%80%BB%E7%BB%93/">java8新特性及多线程总结</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-12T03:54:11.000Z">2022-08-12</time></p><p class="title"><a href="/2022/08/12/keycloak-%E6%95%B4%E5%90%88%E5%BE%AE%E4%BF%A1-union-id%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E7%BB%9F%E4%B8%80%E7%99%BB%E5%BD%95/">keycloak 整合微信 union id，实现微信统一登录</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-10T02:34:56.000Z">2022-08-10</time></p><p class="title"><a href="/2022/08/10/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-keycloak-SAT-%E8%B0%83%E7%94%A8-rest-api/">如何使用 keycloak SAT 调用 rest api</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-04T09:47:59.000Z">2022-08-04</time></p><p class="title"><a href="/2022/08/04/%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E6%9C%8D%E5%8A%A1%E8%B7%AF%E7%94%B1%E7%9A%84%E5%AE%9E%E7%8E%B0/">自动注册服务路由的实现</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-01T02:40:51.000Z">2022-08-01</time></p><p class="title"><a href="/2022/08/01/Spring-Cloud-Gateway-CORS-%E9%85%8D%E7%BD%AE/">Spring Cloud Gateway CORS 配置</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/06/"><span class="level-start"><span class="level-item">六月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">广告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4152165722952624" data-ad-slot="8341006320" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Rainbow</a><p class="is-size-7"><span>&copy; 2022 rainbow</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
